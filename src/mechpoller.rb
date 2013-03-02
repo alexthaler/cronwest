@@ -12,7 +12,9 @@ class MechPoller
                     puts "Job #{row['jobId']} has startTime #{row['startTime']}"
                     if Time.parse(row['startTime']) < Time.now.utc
                         puts "Job #{row['jobId']}s startTime has passed and is now being triggered"
-                        execute_request(row)
+                        result = execute_request(row)
+                        puts "Job #{row['jobId']} result:"
+                        puts result
                         jobs.remove({:jobId => row['jobId']})
                     end
                 end

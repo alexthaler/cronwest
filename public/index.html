@@ -7,7 +7,6 @@
         <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/cronwest.js"></script>
     </head>
     <body>
         <div class="container">
@@ -17,16 +16,16 @@
                     <div class="well">
                     <fieldset>
                         <label>
-                            <input type="text" placeholder="First Name">
+                            <input id="firstName" type="text" placeholder="First Name">
                         </label>
                         <label>
-                            <input type="text" placeholder="Last Name">
+                            <input id="lastName" type="text" placeholder="Last Name">
                         </label>
                         <label>
-                            <input type="text" placeholder="Confirmation Number">
+                            <input id="confirmationNumber" type="text" placeholder="Confirmation Number">
                         </label>
                     </fieldset>
-                      <div id="datetimepicker2" class="input-append">
+                      <div id="datetimepicker" class="input-append">
                         <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text"/>
                         <span class="add-on">
                           <i data-time-icon="icon-time" data-date-icon="icon-calendar">
@@ -34,7 +33,7 @@
                         </span>
                       </div>
                     </div>
-                    <button type="submit" class="btn">Submit</button>
+                    <button class="btn" type="button" onclick="submitData()">Submit</button>
                 </fieldset>
             </form>
         </div>
@@ -43,11 +42,12 @@
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script type="text/javascript">
           $(function() {
-            $('#datetimepicker2').datetimepicker({
+            $('#datetimepicker').datetimepicker({
               language: 'en',
               pick12HourFormat: true
             });
           });
         </script>
+        <script src="js/cronwest.js"></script>
     </body>
 </html>

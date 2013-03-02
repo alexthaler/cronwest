@@ -11,7 +11,7 @@ class MechDriver
         a.get('http://www.southwest.com/flight/retrieveCheckinDoc.html?forceNewSession=yes') do |page|
 
           checkin_result = page.form_with(:name => 'retrieveItinerary') do |checkin|
-            checkin.confirmationNumber = opts[:confNum]
+            checkin.confirmationNumber = opts[:confirmationNumber]
             checkin.firstName = opts[:firstName]
             checkin.lastName = opts[:lastName]
           end.submit
