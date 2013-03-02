@@ -3,7 +3,7 @@ require 'mechanize'
 
 class MechDriver
 
-    def fire_request() 
+    def fire_request(opts) 
         a = Mechanize.new { |agent|
           agent.user_agent_alias = 'Mac Safari'
         }
@@ -11,9 +11,9 @@ class MechDriver
         a.get('http://www.southwest.com/flight/retrieveCheckinDoc.html?forceNewSession=yes') do |page|
 
           checkin_result = page.form_with(:name => 'retrieveItinerary') do |checkin|
-            checkin.confirmationNumber = 'FOOAWESOME'
-            checkin.firstName = 'Thomas'
-            checkin.lastName = 'Awesome'
+            checkin.confirmationNumber = opts[:confNum]
+            checkin.firstName = opts[:firstName]
+            checkin.lastName = opts[:lastName]
           end.submit
 
           return checkin_result.search('#errors li').to_s.gsub(/<\/?[^>]*>/, "")

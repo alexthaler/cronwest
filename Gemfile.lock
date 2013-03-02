@@ -1,8 +1,10 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    bson (1.8.2)
     domain_name (0.5.7)
       unf (~> 0.0.3)
+    json (1.7.3)
     mechanize (2.5.1)
       domain_name (~> 0.5, >= 0.5.1)
       mime-types (~> 1.17, >= 1.17.2)
@@ -12,6 +14,8 @@ GEM
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.21)
+    mongo (1.8.2)
+      bson (~> 1.8.2)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.8)
     nokogiri (1.5.6)
@@ -33,5 +37,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  json
   mechanize
+  mongo
   sinatra
