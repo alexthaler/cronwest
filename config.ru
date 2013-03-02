@@ -1,4 +1,4 @@
 require 'sinatra'
-require './src/mechwest'
+require './src/cronwest'
 
 run Cronwest.new

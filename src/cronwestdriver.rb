@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'mechanize'
 
-class MechDriver
+class CronWestDriver
 
     def fire_request(opts) 
         a = Mechanize.new { |agent|

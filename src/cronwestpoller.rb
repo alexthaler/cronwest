@@ -1,8 +1,8 @@
 require 'time'
-require_relative 'mechdriver'
+require_relative 'cronwestdriver'
 
 
-class MechPoller
+class CronWestPoller
 
     def spawn_poller(jobs, timeout)
         Thread.new(jobs, timeout) do |jobs, timeout|
@@ -24,7 +24,7 @@ class MechPoller
     end
 
     def execute_request(job)
-        MechDriver.new.fire_request({:firstName => job['firstName'], :lastName => job['lastName'],
+        CronWestDriver.new.fire_request({:firstName => job['firstName'], :lastName => job['lastName'],
                                      :confirmationNumber => job['confirmationNumber']})
     end
 

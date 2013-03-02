@@ -2,7 +2,7 @@ require 'sinatra'
 require 'mongo'
 require 'json'
 require 'time'
-require_relative 'mechpoller'
+require_relative 'cronwestpoller'
 
 include Mongo
 
@@ -17,7 +17,7 @@ class Cronwest < Sinatra::Base
 
         set :public_folder, 'public'
 
-        MechPoller.new.spawn_poller($jobs, 5)
+        CronWestPoller.new.spawn_poller($jobs, 5)
     end
 
     get '/' do
