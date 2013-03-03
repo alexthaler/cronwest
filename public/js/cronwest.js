@@ -13,6 +13,17 @@ function submitData() {
         confirmationNumber:confirmationNumber.val(), startTime:convertDateToUTC(picker.getDate())}
     $.post("/job", JSON.stringify(data))
     .done(function (data) {
-            alert('Response: ' + data);
+  	  	$.globalMessenger().post({
+		  	message:  "Your request has been received, your locator is " + data,
+		  	type: 'success',
+		  	showCloseButton: true
+		});
+    })
+    .fail(function (data) {
+    	$.globalMessenger().post({
+		  	message:  "Your request was invalid please double check all fields for correctness",
+		  	type: 'error',
+		  	showCloseButton: true
+		});	
     })
 }
