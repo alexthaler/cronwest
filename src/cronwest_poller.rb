@@ -1,5 +1,5 @@
 require 'time'
-require_relative 'cronwestdriver'
+require_relative 'cronwest_driver'
 
 
 class CronWestPoller

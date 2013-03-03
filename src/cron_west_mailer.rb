@@ -5,7 +5,7 @@ class CronWestMailer
     def send_mail(client_email, result)
         puts "sending email"
 
-        email_props = YAML.load_file('src/yml/emailprops.yml')
+        email_props = YAML.load_file('config/emailprops.yml')
 
         puts "trying to send email with account #{email_props['email_account']}"
         sending_email = email_props['email_account']

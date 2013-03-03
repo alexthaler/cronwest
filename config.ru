@@ -1,4 +1,4 @@
 require 'sinatra'
-require './src/cronwest'
+require './src/cron_west'
 
-run Cronwest.new
+run CronWest.new

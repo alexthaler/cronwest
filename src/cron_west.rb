@@ -2,11 +2,11 @@ require 'sinatra'
 require 'mongo'
 require 'json'
 require 'time'
-require_relative 'cronwestpoller'
+require_relative 'cronwest_poller'
 
 include Mongo
 
-class Cronwest < Sinatra::Base
+class CronWest < Sinatra::Base
 
     configure do 
         puts "configurating!"
