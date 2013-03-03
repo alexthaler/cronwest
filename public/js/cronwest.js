@@ -2,6 +2,7 @@
 var firstName = $('#firstName');
 var lastName = $('#lastName');
 var confirmationNumber = $('#confirmationNumber');
+var clientEmail = $('#clientEmail');
 
 function convertDateToUTC(date) { return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
     date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
@@ -10,7 +11,8 @@ function convertDateToUTC(date) { return new Date(date.getUTCFullYear(), date.ge
 function submitData() {
     var picker = $('#datetimepicker').data('datetimepicker');
     var data = {firstName:firstName.val(), lastName:lastName.val(),
-        confirmationNumber:confirmationNumber.val(), startTime:convertDateToUTC(picker.getDate())}
+        confirmationNumber:confirmationNumber.val(), startTime:convertDateToUTC(picker.getDate()),
+        clientEmail:clientEmail.val()}
     $.post("/job", JSON.stringify(data))
     .done(function (data) {
   	  	$.globalMessenger().post({

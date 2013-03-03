@@ -12,7 +12,9 @@ class CronWestPoller
                     puts "Job #{row['jobId']} has startTime #{row['startTime']}"
                     if Time.parse(row['startTime']) < Time.now.utc
                         puts "Job #{row['jobId']}s startTime has passed and is now being triggered"
-                        result = execute_request(row)
+                        if row['clientEmail'] != nil
+                            result = execute_request(row)
+                        end
                         puts "Job #{row['jobId']} result:"
                         puts result
                         jobs.remove({:jobId => row['jobId']})
@@ -25,7 +27,8 @@ class CronWestPoller
 
     def execute_request(job)
         CronWestDriver.new.fire_request({:firstName => job['firstName'], :lastName => job['lastName'],
-                                     :confirmationNumber => job['confirmationNumber']})
+                                     :confirmationNumber => job['confirmationNumber'],
+                                     :clientEmail => job['clientEmail']})
     end
 
 end
