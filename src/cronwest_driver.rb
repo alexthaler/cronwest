@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'mechanize'
-require_relative 'cron_west_mailer'
+require_relative 'cronwest_mailer'
 
 class CronWestDriver
 
@@ -20,7 +20,7 @@ class CronWestDriver
             result = checkin_result.search('#errors li').to_s.gsub(/<\/?[^>]*>/, "")
 
             mailer = CronWestMailer.new
-            puts "Sending email to #{opts[:clientEmail]}"
+            $logger.info "Sending email to #{opts[:clientEmail]}"
             mailer.send_mail(opts[:clientEmail], result)
 
         end

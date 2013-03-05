@@ -4,20 +4,16 @@ require_relative 'cronwest_driver'
 
 class CronWestPoller
 
-    def spawn_poller(jobs, timeout)
-        Thread.new(jobs, timeout) do |jobs, timeout|
+    def spawn_poller(data_manager, timeout)
+        Thread.new(data_manager, timeout) do |data_manager, timeout|
             while true do
-                puts "polling"
-                jobs.find.each do |row|
-                    puts "Job #{row['jobId']} has startTime #{row['startTime']}"
-                    if Time.parse(row['startTime']) < Time.now.utc
-                        puts "Job #{row['jobId']}s startTime has passed and is now being triggered"
-                        if row['clientEmail'] != nil
-                            result = execute_request(row)
+                data_manager.find_all_jobs.each do |job|
+                    if Time.parse(job['startTime']) < Time.now.utc
+                        $logger.info "Job #{job['jobId']}s startTime has passed and is now being triggered"
+                        if job['clientEmail'] != nil
+                            execute_request(job)
                         end
-                        puts "Job #{row['jobId']} result:"
-                        puts result
-                        jobs.remove({:jobId => row['jobId']})
+                        data_manager.complete_job(job)
                     end
                 end
                 sleep(timeout)
