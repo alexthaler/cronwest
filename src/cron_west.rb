@@ -27,25 +27,11 @@ class CronWest < Sinatra::Base
         set :public_folder, 'public'
         enable :logging
 
-        $poller = CronWestPoller.new.spawn_poller($data_manager, 5)
-    end
-
-    configure :production do
-        set :clean_trace, true
-        Dir.mkdir('logs') unless File.exist?('logs')
-
-        $logger = Logger.new('logs/common.log','weekly')
-        $logger.level = Logger::INFO
-
         # Spit stdout and stderr to a file during production
         # in case something goes wrong
-        $stdout.reopen("logs/output.log", "w")
         $stdout.sync = true
-        $stderr.reopen($stdout)
-    end
 
-    configure :development do
-        $logger = Logger.new(STDOUT)
+        $poller = CronWestPoller.new.spawn_poller($data_manager, 5)
     end
 
     get '/' do
@@ -53,7 +39,7 @@ class CronWest < Sinatra::Base
     end
 
     get '/job/:job_id' do
-        $logger.info "in jobid finding job #{params[:job_id]}"
+        puts "in jobid finding job #{params[:job_id]}"
         $data_manager.find_jobs_by_id(params[:job_id].to_i).to_a
     end
 
@@ -63,10 +49,10 @@ class CronWest < Sinatra::Base
         verify_and_setup_job(new_job)
 
         if Time.parse(new_job['startTime']) > Time.now.utc then
-            $logger.info "Time #{new_job['startTime']} is later than now so it will be saved"
+            puts "Time #{new_job['startTime']} is later than now so it will be saved"
             created_job = $data_manager.create_job(new_job)
         else 
-            $logger.info "Time #{new_job['startTime']} is before now and cannot be saved"
+            puts "Time #{new_job['startTime']} is before now and cannot be saved"
             return 500
         end    
 

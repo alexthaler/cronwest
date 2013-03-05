@@ -5,6 +5,7 @@ require_relative 'cronwest_mailer'
 class CronWestDriver
 
     def fire_request(opts)
+        puts "attempting to get result from southwest"
         a = Mechanize.new { |agent|
             agent.user_agent_alias = 'Mac Safari'
         }
@@ -19,8 +20,10 @@ class CronWestDriver
 
             result = checkin_result.search('#errors li').to_s.gsub(/<\/?[^>]*>/, "")
 
-            mailer = CronWestMailer.new
-            $logger.info "Sending email to #{opts[:clientEmail]}"
+            puts "got result from SW: #{result}"
+
+            mailer = CronwestMailer.new
+            puts "Sending email to #{opts[:clientEmail]}"
             mailer.send_mail(opts[:clientEmail], result)
 
         end

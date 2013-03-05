@@ -9,8 +9,9 @@ class CronWestPoller
             while true do
                 data_manager.find_all_jobs.each do |job|
                     if Time.parse(job['startTime']) < Time.now.utc
-                        $logger.info "Job #{job['jobId']}s startTime has passed and is now being triggered"
+                        puts "Job #{job['jobId']}s startTime has passed and is now being triggered"
                         if job['clientEmail'] != nil
+                            puts "executing request"
                             execute_request(job)
                         end
                         data_manager.complete_job(job)
