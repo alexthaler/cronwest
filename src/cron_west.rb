@@ -22,7 +22,7 @@ class CronWest < Sinatra::Base
         end
 
         $db = $client['cronwest-db']
-        $data_manager = CronWestDataManager.new($db)
+        $data_manager = CronwestDataManager.new($db)
 
         set :public_folder, 'public'
         enable :logging
