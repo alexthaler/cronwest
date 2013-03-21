@@ -18,7 +18,14 @@ class CronWestDriver
                 checkin.lastName = opts[:lastName]
             end.submit
 
-            result = checkin_result.search('#errors li').to_s.gsub(/<\/?[^>]*>/, "")
+
+            errors = checkin_result.search('#errors li').to_s
+
+            if !errors.empty? then
+                result = errors.gsub(/<\/?[^>]*>/, "")
+            else 
+                # Put actual logic to click on #printDocumentsButton here
+            end
 
             puts "got result from SW: #{result}"
 
